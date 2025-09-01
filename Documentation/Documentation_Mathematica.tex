@@ -1,0 +1,497 @@
+%\documentclass[12pt]{amsart}
+\documentclass[12pt]{article}
+
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+% \geometry{landscape} % rotated page geometry
+
+\usepackage{enumitem}
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx} % add graphics capabilities
+\graphicspath{}
+\usepackage{url}
+\usepackage[font=small,skip=0pt]{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[most]{tcolorbox}
+\usepackage{lipsum}% just for the example
+
+\usepackage{booktabs,lipsum,calc}
+\usepackage{multirow}
+\usepackage{mathtools}
+
+\usepackage[percent]{overpic}
+\usepackage[toc,page]{appendix}
+\usepackage{amsmath}
+ \numberwithin{equation}{subsection}
+\usepackage{chngcntr}
+%\usepackage{lineno} % To add line numbers
+\usepackage{amsmath} % AMS operators and symbols
+\usepackage{amssymb} % AMS operators and symbols
+\usepackage{bm} % Define \bm{} to use bold math symbols
+\usepackage{epstopdf} % allow use of .eps graphics with pdflatex
+\usepackage{setspace} % http://www.ctan.org/pkg/setspace
+\usepackage{color} % Allow color support
+%\usepackage{subfigure} % subfigure support
+\usepackage{float} % http://www.ctan.org/tex-archive/macros/latex/contrib/float/
+\usepackage{placeins} % ftp://ftp.ctan.org/tex-archive/macros/latex/contrib/placeins/placeins.txt
+\usepackage[bookmarks,colorlinks,breaklinks]{hyperref} % Add hyperref type links in the document, colors
+\definecolor{dullmagenta}{rgb}{0.4,0,0.4} % #660066
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+\usepackage{natbib} % for other bibliography things
+\bibpunct{(}{)}{;}{a}{,}{,}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png} % convert tifs and pngs
+\graphicspath{{graphics/}} % add other graphics path instead of ./
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+% Show labels inline for easy referencing
+%\usepackage[inline]{showlabels,rotating} % to show labels on equations
+%\renewcommand{\showlabelfont}{\scriptsize \slshape \color{red}}
+%\renewcommand{\showlabelsetlabel}[1]{
+%\begin{turn}
+%{0}\showlabelfont #1
+%\hspace{15pt}
+%\end{turn}
+%}
+
+%\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{verbatim}
+\usepackage{lscape}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{arydshln}
+
+\newlength{\Oldarrayrulewidth}
+% Cline redefining to add line thickness
+\newcommand{\Cline}[2]{%
+  \noalign{\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}}%
+  \noalign{\global\setlength{\arrayrulewidth}{#1}}\cline{#2}%
+  \noalign{\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}}
+}
+
+
+\definecolor{intnull}{RGB}{213,229,255}
+\definecolor{inteins}{RGB}{128,179,255}
+\definecolor{intzwei}{RGB}{42,127,255}
+\definecolor{intdrei}{RGB}{0,85,212}
+\definecolor{intvier}{RGB}{0,51,128}
+\definecolor{intfunf}{RGB}{0,34,85}
+
+% See the ``Article customise'' template for come common customisations
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newsavebox{\leftbox}
+\newsavebox{\rightbox}
+
+\graphicspath{{/Users/mahdiyeh/OneDrive - Imperial College London/Mahdieh/Pictures}}
+
+\title{Documentation}
+\author{Mahdieh Ebrahimi}
+%\date{\today} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+\tableofcontents
+
+%
+% subtitle is optional
+%
+%%%\subtitle{Do you have a subtitle?\\ If so, write it here}
+
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+
+%---------------------------------------------------Section-------------------------
+\section{README files}
+
+\subsection{File execution order }
+
+\textbf{InPut files}\\
+input and Fracture energy files provide an input numbers for package1 and contains information and it contains primitive information of system geometry and properties. 
+
+
+\subsubsection{Interactions: Multipole Method}
+
+\begin{enumerate}
+\item \textbf{geometry}: 
+The initial geometry of the system will be defined by running this file. It reads information from input file.
+
+\item \textbf{expansionCoefficients}: 
+Employing the information in geometry file, all expansion coefficients (Eta and Mu) are calculated using expansionCoefficients file. 
+
+\item \textbf{abmnpq}: 
+In this file expansion coefficients of harmonic terms are calculated. 
+
+
+\item \textbf{matrix}: 
+After some analytical calculations, the whole problem is reduced to a set of linear system of equations. To solve the system using linear solver, the system has to be write in matrix format.
+
+\item \textbf{farfield}:
+All stress fields in the system have to be expanded in bases of the harmonic terms. Therefore, far field which is uniform here is expanded in terms of harmonic terms in this file. 
+
+\item \textbf{linearSolve}: 
+In this file, a linear system of equation is solved using Linear solver and results that are expansion coefficients A,B,C, and D are written in the LinearSolve file. 
+
+\item \textbf{PhiPsi}: 
+Phi and Psi are scalar Muskhelishvili potentials of complex variable method in plane Elasticity. Zero suffix functions denote potentials in the matrix host. 
+
+\item \textbf{StressFields}: 
+Stress fields in $y_{q}$ local in $z_{q}$ local and in z global coordinate system are calculated. 
+
+\item \textbf{DisplacementFields}: 
+\textcolor{red}{I Have To Check The Correctness Of The Field In The Package. }\\
+Displacement fields in $y_{q}$ local in $z_{q}$ local and in z global coordinate system are calculated. 
+
+\item \textbf{SIF}: 
+\textcolor{red}{I Have To Check The Correctness Of The Field In The Package} $K[q]$ and $Kminus[q]$ for each inclusions are calculated in this file. $k$ and  $kminus$ show SIF i and ii (mode I and II) for RHS and LHS of the inclusion respectively.
+
+\item \textbf{PackageManipulations}: 
+(* :Author:Leonid B.Shifrin*)\\
+The package provides tools to (dynamically) re-load, clear and/or remove the context of any loaded package (optionally with sub-contexts) during interactive Mathematica session or during execution of a stand-alone program. These operations are performed respecting the general package mechanics in Mathematica.Additional functionality includes (optional) automatic resolving of shadowing problems that may have occured before or during reloading,and tracking escaping symbols 
+
+\end{enumerate}
+
+\clearpage
+\subsubsection{\textcolor{red}{Crack propagation}}
+
+\clearpage
+\subsubsection{File Boundary Element Method}
+
+\begin{enumerate}
+
+\item  \textbf{GenerateMesh}: Boundary discretization. Save XY matrix in XY.dat file.
+
+\item  \textbf{FieldsBE}:     Base solution Stress and displacement fields.
+
+\item  \textbf{CoefMat}:      Produce coefficient matrixes Uij and Cij. Save Uij and Cij matrix in Uij.dat and Cij.dat files.
+
+\item  \textbf{BCSolve}:      Form solution matrix Sij depending boundary condition.
+
+\item Define $B.C: s$ vector of $2*NTOTAL$ elements.
+
+\item Solve $Sij.W = s$ and find W as weight function vector. Save W vector in $W.dat$ file.
+
+\item  \textbf{FieldsXY}:   Substitute W in the new matrix of $Uij(x,y)$ and $Cij(x,y)$ and finding fields using $Uij(x,y).W$ and $Cij(x,y).W$.
+\end{enumerate}
+
+\clearpage
+\subsubsection{\textcolor{red}{Thermal Effects}}
+
+\clearpage
+\subsubsection{\textcolor{red}{Dislocation Dynamics}}
+
+\clearpage
+\subsubsection{File run}
+
+\begin{itemize}
+
+
+\item  \textbf{CombinMMBE}:
+In this file a tangential stress field caused by the grain boundary on the premier of 
+the $qth$ inclusion is calculated. This function will be used to find a correct propagation direction in eta0 function in the run2 file.
+
+\item  \textbf{run0}:
+In this file stress fields of the system are calculated using the multipole 
+method. Then, by using the correct coefficients and removing regular fields 
+(by equating $Eta_{nmpq}$ and $Mu_{nmpq}$ ), stress fields can be calculated at any point 
+in the model.
+
+\item  \textbf{run1}: 
+This file produces two matrixes of expansion coefficients; eta and mu.
+
+
+\item  \textbf{run02}:
+This file calculates the stress fields caused by the inclusions on the points of the mesh of the grain boundary. This information ($SMM$) will be used as the supplementary boundary condition for BE method.
+Then, change expansion coefficient to the original values and combine BE and MM by loading \textbf{CombinMMBE} file. 
+
+\item  \textbf{run2}: 
+In this file coordinates of the new propagated inclusion are found using the maximum tangential stress criterion. The new coordinate is saved in the output file. It automatically updates the output file.
+
+\item  \textbf{run3}: 
+In this file, the path propagation of an inclined inclusion is calculated. The path propagation is predicted by just adding crack/inclusion and recalculating stress fields between cracks/inclusions. 
+ 
+\item  \textbf{run4}: 
+In this file the path propagation of an inclined inclusion is calculated. The path propagation is predicted by finding an equivalent crack/inclusion and recalculating stress fields between cracks/inclusions. 
+
+\item  \textbf{run5}: 
+This file reads output1 and calculates crack propagation path.
+
+\item  \textbf{run1EtaMu0}: 
+Using this file, the full stress field of the system can be calculated. 
+
+\end{itemize}
+
+
+\clearpage
+\subsection{README-HowToRunNote.txt}
+
+To start running the package, 
+
+\begin{itemize}
+
+\item you must once use the \textbf{initiation.nb} file and run it on your computer. It defines the package folder path to run the program. The file will be created in the home directory of your computer and the main package folder.
+
+\item To test and run the package you can use the \textbf{DCD\_Run.nb} file in the main folder
+
+\end{itemize}
+
+\clearpage
+\subsection{README-RunErrorNote}
+\begin{enumerate}
+\item ErrorNote1: Part::partw: Part 2 of {{0}} does not exist. 
+
+\item Matrices Eta, Mu are calculated using \textbf{run1.m} file. New matrices Eta and Mu have to be recalculated before starting simulation on any new configuration of inclusions. Therefore, the first step for any new configuration is running \textbf{run1.m}. Otherwise, the above error will appear. 
+
+
+\item StartNote2: To the start the program, the output file must not be in the folder.  
+
+\item ErrorNote2: Some times if the crack is inside the interface layer, the program can not solve it correctly. You must change the crack incremental size to get the correct result.
+
+
+\end{enumerate}
+
+\clearpage
+\subsection{README-input-output}
+
+\begin{itemize}
+\item n = It defines the total number of harmonic terms for accuracy of the calculations.
+
+\item num1 = Crack propagation criterion. Number 1, is the to search on the surface of inclusion for max energy, number 2 uses SIFs.
+
+\item num2 = It determines which process has to be used to calculate SIF; 1 is the formula from MM, 2 is the average SIF over short distance.
+
+\item ntot= total number of inclusions
+
+\item Nu0 = Poisson ratio for the host material
+\item Mu0 = Shear modulus for the host material 
+
+\item Uniform Far-field:\\
+s11\\
+s12\\
+s22
+
+\item NuQ = Poisson ratio for the inclusions (ntot terms, ntot = number of inclusions )
+\item MuQ = Shear modulus for the inclusions (ntot terms)
+
+\item l1 = Major axis of elliptical inclusions (ntot terms)
+\item l2 = Minor axis of elliptical inclusions (ntot terms)
+\item teta = Inclusion’s orientation $[-90,90]$ (ntot terms)
+\item tetaprime = Inclusion’s orientation $ [0,360]$( ntot terms)
+\item zcender = (x+Iy) centre point of each inclusions in global coordinate system.
+\item zcendernew = centre point of each new created inclusions in global coordinate system.
+
+\end{itemize}
+
+
+The input file provides input numbers for package1 (geometry)  and contains primitive information of system geometry and properties. The output file has the same information after executing the simulation. 
+
+
+
+\clearpage
+\subsection{README-output-files}
+
+\begin{itemize}
+
+\item \textbf{output}: Store information after each simulation step. It should finally contain $ninitial +1$ inclusions.
+
+\item \textbf{outputtemp}: Store information about the system configuration after merging two inclusions at each simulation step.
+
+\item \textbf{output1}: Store all information about the primary inclusions before merging. Crack propagation path and inclination angle changes can be derived from this file.
+
+\item \textbf{output2}:  Delete latest inclusion's information from the \textbf{outputtemp} to explicitly present crack propagation with two cracks at each simulation step. Then, \textbf{output2} is copied to the output and simulation is run by a higher number of n for obtaining a better accuracy of the system $SIFs$.
+
+\item \textbf{outputnew}: Information of the new inclusion. I have to check it; seems odd to me!
+
+\item \textbf{cracktemp}: Contains information of two inclusions that present crack propagation at each step. {{l1[1], l1[2], l2[1], l2[2], theta[1], theta[2], kminus[1], k[2], kcrack[1], kcrack[2]}}
+%
+\item \textbf{crack.XLSX} cracktemp file restored in the XLSX and csv file formats. 
+%
+\item \textbf{crack.csv}
+
+\end{itemize}
+
+\clearpage
+\subsection{README-outputnew}
+
+\begin{itemize}
+\item l1new  = Size of new inclusion + delta distance between them
+\item tetanew = Angle of new inclusion 
+\item zcenternew = centre of new inclusion
+\item NuQ1temp = 0
+\item MuQ1temp = 0
+\end{itemize}
+
+
+
+\clearpage
+\subsection{README-FractureEnergy}
+
+\begin{itemize}
+
+\item  G0::usage ="Fracture energy of host material.";
+\item  GQ::usage ="Fracture energy of inclusions.";
+\item  kQ::usage ="Surface perfectness of inclusions.";
+\item  GGB::usage ="Fracture energy of the grain boundaries.";
+\item  VGB::usage =“Vertices of the grain boundaries.";
+\item  BE::usage=" If use finite boundary put 1 in the Fracture energy file, otherwise 0."; 
+\item  GB::usage=" If use grain boundary put 1 in the Fracture energy file, otherwise 0."; 
+\item  TS::usage=" If use Thermal Stress put 1 in the Fracture energy file, otherwise 0."; 
+
+\item  ltemp
+
+\item  lnew::usage="lnew is a half length of new microcrack in the crack propagation."; 
+
+\item  delta::usage="It defines the distance between new added inclusions.";
+
+\item  l2ratio::usage="It is the 1/e ratio, where e is the aspect ratio.";
+
+\item  ttest::usage="Is the number of cracks that are being added to the main crack to predict crack propagation more accurately.";
+
+\item inc::usage="";
+
+\item naccuracy::usage="";
+
+\end{itemize}
+
+Number of parameter in the list is $ntot -1$ or $ntot-(inclusions participate in the crack)$
+
+
+
+\clearpage
+\subsection{README-ThermalExpansion}
+\begin{itemize}
+\item ThermalExpansion0 = Thermal expansion coefficient of the matrix material
+\item ThermalExpansiontemp = list of thermal expansion coefficient of the inclusions
+\item ThermalConductivity0 = Thermal Conductivity of the matrix material (watts/ meter/ Kelvin).
+\item ThermalConductivityQ = Thermal Conductivity of the inclusions (watts/ meter/ Kelvin).
+\item TStart = Initial temperature
+\item TEnd= End temperature 
+
+\end{itemize}
+
+
+\clearpage
+ \subsection{README-COMPRESSION}
+ 
+
+\textbf{COMPRESSION}: In this file crack propagation from two ends is simulated. This can be used either for tension or expansion. The $ntot $ inclusion is the one that propagates. 
+
+\textbf{main-crack-oneDirection}: In this file the main-crack-One path propagation from RHS is simulated. The $“ntot”$ is the inclusion that propagates. 
+
+\clearpage
+\subsection{README-LinearSolve}
+
+\newpage
+%%% List of variables and functions ---------------------------------------------------------------
+\section{List of variables and functions used in the code}
+
+\subsection*{geometry.m}
+\begin{enumerate}
+\item n::usage ="number of harmonic terms";
+\item  num1::usage ="Crack propagation criterion. Number 1, is the to search on the surface of inclusion for max \item  energy, number 2 uses SIFs.";
+\item  num2::usage ="It determines which process has to be used to calculate SIF; 1 is the formula from MM, 2 is the average SIF over short distance.";
+\item ntot::usage ="total number of inclusions in the system";
+\item Chi0::usage ="Chi0=3-4Nu0 for plain strain and (3-Nu0)/(1+Nu0) for plane stress.";
+\item Nu0::usage ="Nu0 matrix poisson ratio";
+\item Mu0::usage ="Mu0 matrix shear modulus";
+\item Theta::usage ="angle of inclination for each inclusion [-90,90]";
+\item Thetaprim::usage ="angle of inclination for each inclusion [0,360]";
+\item dd::usage ="2d is the inter-foci distance of an inclusion";
+\item Dq::usage ="2d is the real part of the inter-foci distance of an inclusion";
+\item dpq::usage ="dpq=dp+dq";
+\item Zeta0::usage ="Zeta0[p]=The matrix-inclusion inerface of the p particle";
+\item v0::usage ="v0=Exp[Zeta0]";
+\item Chi::usage ="Chi=3-4Nu";
+\item MuBar::usage ="relative shear modulus";
+\item Nu::usage ="Poisson ratio";
+\item E0::usage ="Matrix material Young's Modulus in GPa";
+\item EQ::usage ="Inclusions Young's Modulus in GPa";
+\item l1::usage ="l1=major semi - axes of the ellips";
+\item l2::usage ="l2=minor semi - axes of the ellips";
+\item MuQ::usage ="shear modulus";
+\item s11::usage ="s11 Farfield stress field";
+\item s12::usage ="s12 Farfield stress field";
+\item s22::usage ="s22 Farfield stress field";
+\item tetatemp::usage ="Inclusion inclination angle [-90,90]";
+\item tetatempprim::usage ="Inclusion inclination angle [0,360]";
+\item e::usage ="ellipse aspect ratio";
+\item l1temp::usage ="Read information about the inclusion from the input file.";
+\item l2temp::usage ="Read information about the inclusion from the input file.";
+\item NuQtemp::usage ="Read information about the inclusion from the input file.";
+\item MuQtemp::usage ="Read information about the inclusion from the input file.";
+\item zcenter::usage=" center point of new inclusions(cracks) in the global coordinate system"; 
+\item zcenter1::usage=" zcenter"; 
+\item zcenternewlist1=" center point of new inclusions(cracks) in the global coordinate system"; 
+\item G0::usage ="Fracture energy of host material.";
+\item GQ::usage ="Fracture energy of inclusions.";
+\item kQ::usage ="Surface perfectness of inclusions.";
+\item GintQ::usage ="Fracture energy of interface of the inclusions (G0*kQ[i]).";
+\item GGB::usage ="Fracture energy of the grain boundaries.";
+\item vertexList::usage ="";
+\item BE::usage=" If use finite boundary put 1 in the Fracture energy file, otherwise 0."; 
+\item GB::usage=" If use grain boundary put 1 in the Fracture energy file, otherwise 0."; 
+\item TS::usage=" If use Thermal Stress put 1 in the Fracture energy file, otherwise 0."; 
+\item EndPoint::usage = "EndPoint[p]= EndPoint of the inclusion"; 
+\item StartPoint::usage = "StartPoint[p]= StartPoint of the inclusion"; 
+
+\item lnew1::usage="lnew1/2 is a vertical distance from the surface of the inclusion at eta0 angle."; 
+\item delta::usage="It defines the distance between new added inclusions.";
+\item l2ratio::usage="It is the 1/e ratio, where e is the aspect ratio.";
+\item lnew::usage="lnew is a half length of new microcrack in the crack propagation."; 
+\item ttest::usage="Is the number of cracks that are being added to the main crack to predict crack propagation more accuratly.";
+\item inc::usage="";
+\item naccuracy::usage="";
+\item lnewtest::usage="This is the obtained function to calculate the optimum distance between 
+two micro-cracks to be able to approximate it with a kinked crack.";
+\item LNEW::usage="LNEW[i]";
+\item LNEW1::usage="LNEW1";
+\item ChangeLNEW::usage="ChangeLNEW[ninitial1]";
+\item ChangeLNEW1::usage="ChangeLNEW1[deltat,lt]";
+\item Changelnewsize::usage=" Changelnewsize[lnewt,deltat]";
+\item Deltatest::usage="Deltatest[l2,l1t]";
+\item DELTANEW::usage="DELTANEW[initial1]";
+\item DELTANEW1::usage="DELTANEW[initial1]";
+
+\item ThermalExpansion0::usage="ThermalExpansion0= Matrix material thermal expansion 1/K";
+\item ThermalExpansionQ::usage="ThermalExpansionQ= Inclusions' thermal expansion 1/K";
+\item ThermalConductivity0::usage="Thermal Conductivity of the matrix material. (watts/ meter/ Kelvin)";
+\item ThermalConductivityQ::usage="Thermal Conductivity of the inclusions. (watts/ meter/ Kelvin)";
+\item ThermalExpansiontemp::usage="An array of Inclusions' thermal expansion 1/K";
+\item ThermalConductivitytemp::usage="Thermal Conductivity of the inclusions. (watts/ meter/ Kelvin)";
+\item ThermalConductivityQBar::usage="Thermal Conductivity of the inclusions/Thermal Conductivity of Matrix material.";
+\item TStart::usage="Initial temperature! (K)";
+\item TEnd::usage="End temperature! (K) ";
+
+\item FractureEnergyBC::usage="FractureEnergyBC[BE1,GB1]";
+\item nChange::usage="nChange[naccuracy]";
+\item FilePath::usage ="Please choose directory of the package.";
+\item OutputFile::usage ="Path to Output file";
+\item InputFile::usage ="Path to input file";
+\item FractureEnergyOutputFile::usage ="Path to Fractureenergy file in output folder";
+\item FractureEnergyInputFile::usage ="Path to Fractureenergy file in input folder";
+\item ThermalExpansionFile::usage ="Path to ThermalExpansion file in output folder";
+(*mFilesPath::usage ="Path to mFiles folder.";*)
+
+\item ReadGeometry::usage ="Read Geometry from the Output file";
+\item FractureEnergy::usage ="Read FractureEnergy file from the Output folder";
+\end{enumerate}
+
+ 
+%% BIBLIOGRAPHY ---------------------------------------------------------------
+\bibliographystyle{unsrt}
+%\bibliography-style{plainnat}
+\bibliography{../../../Read-Articles-Source/ReadArticleSource.bib}
+
+%\newpage
+%%% APPENDIX---------------------------------------------------------------
+%\newpage
+%%% APPENDIX---------------------------------------------------------------
+%\begin{appendices}
+%\end{appendices}
+\end{document}
