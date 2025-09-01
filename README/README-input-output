@@ -1,0 +1,27 @@
+n= It defines the total number of harmonic terms for accuracy of the calculations.
+
+num1 = Crack propagation criterion. Number 1, is the to search on the surface of inclusion for max energy, number 2 uses SIFs.
+
+num2 = It determines which process has to be used to calculate SIF; 1 is the formula from MM, 2 is the average SIF over short distance.
+
+ntot = Total number of inclusions in the system.
+
+Nu0 = Poisson ratio for the host material
+Mu0 = Shear modulus for the host material 
+
+(uniform farfield)
+s11
+s12
+s22
+
+NuQ = Poisson ratio for the inclusions (ntot terms, ntot = number of inclusions )
+MuQ = Shear modulus for the inclusions (ntot terms)
+
+l1 = Major axis of elliptical inclusions (ntot terms)
+l2 = Minor axis of elliptical inclusions (ntot terms)
+teta = Inclusion’s orientation [-90,90](ntot terms)
+teta1 = Inclusion’s orientation [0,360](ntot terms)
+zcender = (x+Iy) centre point of each inclusions in global coordinate system.
+zcendernew = centre point of each new created inclusions in global coordinate system.
+
+input file provides an input numbers for package1 and contains information and it contains primitive information of system geometry and properties. 

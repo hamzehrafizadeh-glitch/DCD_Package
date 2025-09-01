@@ -1,0 +1,87 @@
+Files in order:
+
+########################File Multipole Method:######################
+
+InPut:
+input and Fracture energy files provide an input numbers for package1 and contains information and it contains primitive information of system geometry and properties. 
+
+1- geometry: 
+The initial geometry of the system will be defined by running this file. It reads information from input file.
+
+2- expansionCoefficients: 
+Employing the information in geometry file, all expansion coefficients (Eta and Mu) are calculated using expansionCoefficients file. 
+
+3- abmnpq: 
+In this file expansion coefficients of harmonic terms are calculated. 
+
+
+4- matrix: 
+After some analytical calculations, the whole problem is reduced to a set of linear system of equations. To solve the system using linear solver, the system has to be write in matrix format.
+
+5- farfield:
+All stress fields in the system have to be expanded in bases of the harmonic terms. Therefore, far field which is uniform here is expanded in terms of harmonic terms in this file. 
+
+6- linearSolve: 
+In this file, a linear system of equation is solved using Linear solver and results that are expansion coefficients A,B,C, and D are written in the LinearSolve file. 
+
+7- PhiPsi: 
+Phi and Psi are scalar Muskhelishvili potentials of complex variable method in plane Elasticity. zero suffix functions denote potentials in the matrix host. 
+
+8- StressFields: 
+Stress fields in yq local in zq local and in z global coordinate system are calculated. 
+
+9- DisplacementFields: 
+I Have To Check The Correctness Of The Field In The Package. 
+Displacement fields in yq local in zq local and in z global coordinate system are calculated. 
+
+10- SIF: 
+I Have To Check The Correctness Of The Field In The Package, K[q] and Kminus[q] for each inclusions are calculated in this file. k and  kminus show SIF i and ii (mode I and II) for RHS and LHS of the inclusion respectively.
+
+11- PackageManipulations: 
+(* :Author:Leonid B.Shifrin*)The package provides tools to (dynamically) re-load, clear and/or remove the context of any loaded package (optionally with sub-contexts) during interactive Mathematica session or during execution of a stand-alone program. These operations are performed respecting the general package mechanics in Mathematica.Additional functionality includes (optional) automatic resolving of shadowing problems that may have occured before or during reloading,and tracking escaping symbols 
+
+#####################File Boundary Element Method:###################
+
+1- GenerateMesh: Boundary discretization. Save XY matrix in XY.dat file.
+2- FieldsBE:     Base solution Stress and displacement fields.
+3- CoefMat:      Produce coefficient matrixes Uij and Cij. Save Uij and Cij matrix in Uij.dat and Cij.dat files.
+4- BCSolve:      Form solution matrix Sij depending boundary condition.
+5-               Define B.C: s vector of 2*NTOTAL elements.
+6-               Solve Sij.W = s and find W as weight function vector. Save W vectore in W.dat file.
+7-FieldsXY:      Substitute W in the new matrix of Uij(x,y) and Cij(x,y) and finding fields using Uij(x,y).W 
+                 and Cij(x,y).W.
+
+#############################File run:##############################
+
+CombinMMBE:
+In this file a tangential stress field caused by the grain boundary on the premier of 
+the qth inclusion is calculated. This function will be used to find a correct propagation direction in eta0 function in the run2 file.
+
+run0:
+In this file stress fields of the system are calculated using the multipole 
+method. Then, by using the correct coefficients and removing regular fields 
+(by equating Eta_nmpq and Mu_nmpq ), stress fields can be calculated at any point 
+in the model.
+
+run1: 
+This file produces two matrixes of expansion coefficients; eta and mu.
+
+
+run02:
+This file calculates the stress fields caused by the inclusions on the points of the mesh of the grain boundary. This information (SMM) will be used as the supplementary boundary condition for BE method.
+Then, change expansion coefficient to the original values and combine BE and MM by loading CombinMMBE file. 
+
+run2: 
+In this file by using maximum tangential stress criterion, coordinates of the new propagated inclusion is found.The new coordinate is saved in the output file. It automatically updates the output file.
+
+run3: 
+In this file path propagation of an inclined inclusion is calculated.The path propagation is predicted by just adding crack/inclusion and recalculating stress fields between cracks/inclusions. 
+ 
+run4: 
+In this file path propagation of an inclined inclusion is calculated. The path propagation is predicted by finding an equivalent crack/inclusion and recalculating stress fields between cracks/inclusions. 
+
+run5: 
+This file reads output1 and calculates crack propagation path.
+
+run1EtaMu0: 
+Using this file, the full stress field of the system can be calculated. 

@@ -1,0 +1,14 @@
+output:Stor information after each simulation step. It should finally contain ninitial +1 inclusions.
+
+outputtemp: Store information about the system configuration after merging two inclusions at each simulation step.
+
+output1: Store all information about the primary inclusions before merging. Crack propagation path and inclination angle changes can be derived from this file.
+
+output2:  Delete latest inclusion's information from the outputtemp to explicitly present crack propagation with two cracks at each simulation step. Then, output2 is copied to the output and simulation is run by a higher number of n for obtaining a better accuracy of the system SIFs.
+
+outputnew: Information of the new inclusion. I have to check it; seems odd to me!
+
+cracktemp: Contains information of two inclusions that present crack propagation at each step. {{l1[1], l1[2], l2[1], l2[2], theta[1], theta[2], kminus[1], k[2], kcrack[1], kcrack[2]}}
+
+crack.XLSX cracktemp file restored in the XLSX and csv file formats. 
+crack.csv

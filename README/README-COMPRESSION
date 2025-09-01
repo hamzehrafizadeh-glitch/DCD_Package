@@ -1,0 +1,5 @@
+Files :
+
+COMPRESSION: In this file crack propagation from two ends is simulated. This can be used either for tension or expansion. The ntot inclusion is the one that propagates. 
+
+main-crack-oneDirection: In this file the main-crack-One path propagation from RHS is simulated. The “ntot” is the inclusion that propagates. 

@@ -1,0 +1,4 @@
+ThermalExpansion0 = Thermal expansion coefficient of the matrix material
+ThermalExpansiontemp = list of thermal expansion coefficient of the inclusions
+TStart = Initial temperature
+TEnd= End temperature 

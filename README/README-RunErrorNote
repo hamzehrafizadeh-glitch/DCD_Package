@@ -1,0 +1,9 @@
+
+ErrorNote1: Part::partw: Part 2 of {{0}} does not exist. >>
+
+Matrices Eta,Mu are calculated using run1.m file. New matrices Eta and Mu have to be recalculated before starting simulation on any new configuration of inclusions. Therefore, the first step for any new configuration is running run1.m. Otherwise, the above error will appear. 
+
+
+StartNote2: To the start the program, the output file must not be in the folder.  
+
+ErrorNote2: Some times if the crack is inside the interface layer, the program can not solve it correctly. You must change the crack incremental size to get the correct result.

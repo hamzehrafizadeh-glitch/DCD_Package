@@ -1,0 +1,5 @@
+For[j=1,j<ntot+1,j++,For[i=1,i<n+1,i++,
+Write[s,abmnpq`a[i,j]];
+Write[s,abmnpq`b[i,j]];
+Write[s,abmnpq`c[i,j]];
+Write[s,abmnpq`d[i,j]];

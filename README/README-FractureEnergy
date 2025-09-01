@@ -1,0 +1,25 @@
+
+G0::usage ="Fracture energy of host material.";
+GQ::usage ="Fracture energy of inclusions.";
+kQ::usage ="Surface perfectness of inclusions.";
+GGB::usage ="Fracture energy of the grain boundaries.";
+VGB::usage =“Vertices of the grain boundaries.";
+BE::usage=" If use finite boundary put 1 in the Fracture energy file, otherwise 0."; 
+GB::usage=" If use grain boundary put 1 in the Fracture energy file, otherwise 0."; 
+TS::usage=" If use Thermal Stress put 1 in the Fracture energy file, otherwise 0."; 
+
+ltemp
+
+lnew::usage="lnew is a half length of new microcrack in the crack propagation."; 
+
+delta::usage="It defines the distance between new added inclusions.";
+
+l2ratio::usage="It is the 1/e ratio, where e is the aspect ratio.";
+
+ttest::usage="Is the number of cracks that are being added to the main crack to predict crack propagation more accurately.";
+
+inc::usage="";
+
+naccuracy::usage="";
+
+Number of parameter in the list is ntot -1 or ntot-(inclusions participate in the crack)
