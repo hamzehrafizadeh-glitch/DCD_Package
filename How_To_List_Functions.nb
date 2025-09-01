@@ -1,0 +1,1325 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     53971,       1317]
+NotebookOptionsPosition[     52406,       1283]
+NotebookOutlinePosition[     52848,       1300]
+CellTagsIndexPosition[     52805,       1297]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "First", " ", "I", " ", "have", " ", "to", " ", "run", " ", "packages"}], 
+    ",", " ", 
+    RowBox[{
+    "then", " ", "I", " ", "can", " ", "have", " ", "list", " ", "of", " ", 
+     RowBox[{"functions", "."}]}]}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Get", "[", "\"\<geometry.m\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<geometry`\>\"", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.860734101672696*^9, 3.860734132229999*^9}, {
+  3.860734191521553*^9, 
+  3.86073422075308*^9}},ExpressionUUID->"b141ca8b-dbd8-4ad4-bc95-\
+72dec4324989"],
+
+Cell[BoxData["\<\"geometry \"\>"], "Print",
+ CellChangeTimes->{3.860734133306993*^9},
+ CellLabel->
+  "During evaluation of \
+In[19]:=",ExpressionUUID->"609b47f5-46bf-43ef-8701-e55e7106a148"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"packageNameList", " ", "=", " ", "\n", "  ", 
+   RowBox[{"{", "\n", "    ", 
+    RowBox[{
+    "\"\<geometry\>\"", ",", "\"\<expansionCoefficients\>\"", ",", 
+     "\"\<abmnpq\>\"", ",", "\"\<farfield\>\"", ",", "\"\<AddInclusion\>\"", 
+     ",", "\"\<Addone\>\"", ",", "\"\<BCSolve\>\"", ",", "\"\<Changesize\>\"",
+      ",", "\"\<CoefMat\>\"", ",", "\"\<CombinCDCTEMP0-NoInc\>\"", ",", 
+     "\"\<CombinDCDTEMP\>\"", ",", "\"\<CombinDCDTEMP0\>\"", ",", 
+     "\"\<CombinMMBE\>\"", ",", "\"\<DisplacementFields\>\"", ",", 
+     "\"\<EllipseInterfaceCheck\>\"", ",", "\"\<EnergyTest\>\"", ",", 
+     "\"\<eta0p\>\"", ",", "\"\<FieldsBE\>\"", ",", "\"\<Fieldsxy\>\"", ",", 
+     "\"\<GenerateMesh\>\"", ",", "\"\<GenerateMeshtest\>\"", ",", 
+     "\"\<InterfaceFunc\>\"", ",", "\"\<linearSolve\>\"", ",", 
+     "\"\<LineInterfaceCheck\>\"", ",", "\"\<matrix\>\"", ",", 
+     "\"\<Mergecrack\>\"", ",", "\"\<MergeFinal\>\"", ",", 
+     "\"\<MergeInclusion\>\"", ",", "\"\<PackageManipulations\>\"", ",", 
+     "\"\<PhiPsi\>\"", ",", "\"\<run0\>\"", ",", "\"\<run1\>\"", ",", 
+     "\"\<run1EtaMu0\>\"", ",", "\"\<run1withoutInt\>\"", ",", 
+     "\"\<run02_NOw\>\"", ",", "\"\<run2\>\"", ",", "\"\<run02\>\"", ",", 
+     "\"\<run02tt\>\"", ",", "\"\<run3\>\"", ",", "\"\<run4\>\"", ",", 
+     "\"\<run5\>\"", ",", "\"\<SIF\>\"", ",", "\"\<StressFields\>\""}], "\n", 
+    "  ", "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"packageList", " ", "=", "\n", "  ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", " ", 
+      RowBox[{"#", " ", "<>", " ", "\"\<`*\>\""}], ")"}], " ", "&"}], " ", "/@",
+     "\n", "    ", "packageNameList"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"doc", " ", "=", " ", 
+   RowBox[{"OpenWrite", "[", "\"\<Function_List.txt\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", " ", "=", " ", "1"}], ",", " ", 
+   RowBox[{"i", " ", "<=", " ", 
+    RowBox[{"Length", "[", "packageList", "]"}]}], ",", " ", 
+   RowBox[{"i", "++"}], ",", "\n", "  ", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"doc", ",", " ", 
+      RowBox[{"\"\<\\n\\nPackage: \>\"", " ", "<>", " ", 
+       RowBox[{"packageNameList", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], " ", "<>", " ", "\"\<\\n\\n\>\""}]}], 
+     "]"}], ";", "\n", "  ", 
+    RowBox[{
+     RowBox[{"Cases", "[", "\n", "    ", 
+      RowBox[{
+       RowBox[{"MakeExpression", " ", "@@", " ", 
+        RowBox[{"{", 
+         RowBox[{"Names", "@", 
+          RowBox[{"packageList", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "}"}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"_", "[", "s_", "]"}], " ", ":>", " ", "\n", "      ", 
+        RowBox[{"ToString", "@", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<\\n\\n\>\"", ",", " ", 
+            RowBox[{"HoldForm", "[", "s", "]"}], ",", "\"\< :: \>\"", ",", 
+            " ", 
+            RowBox[{"s", "::", "usage"}]}], "}"}], "]"}]}]}]}], "\n", "  ", 
+      "]"}], " ", "//", "\n", "    ", 
+     RowBox[{
+      RowBox[{"Export", "[", 
+       RowBox[{"doc", ",", " ", "#", ",", " ", "\"\<List\>\""}], "]"}], " ", 
+      "&"}]}]}]}], "\n", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Close", "[", "doc", " ", "]"}]}], "Input",
+ CellChangeTimes->{{3.860731977253718*^9, 3.860731977736328*^9}, {
+   3.8607320788125467`*^9, 3.860732134809656*^9}, 3.860734028945307*^9},
+ CellLabel->"In[76]:=",ExpressionUUID->"d1515d8a-bb5f-43e1-becd-78ab6debff13"],
+
+Cell[BoxData["\<\"Function_List.txt\"\>"], "Output",
+ CellChangeTimes->{
+  3.860733839488263*^9, 3.8607339068596897`*^9, 3.860733998542911*^9, {
+   3.860734136853107*^9, 3.860734166307357*^9}, 3.860734360133617*^9},
+ CellLabel->"Out[80]=",ExpressionUUID->"7bc4a744-69d9-4c81-ac4f-803c98bd0889"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"SystemOpen", "[", "\"\<Function_List.txt\>\"", "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->"In[81]:=",ExpressionUUID->"ddfd6286-db33-437e-beb1-1cfc09fe8d32"],
+
+Cell[BoxData[
+ RowBox[{"SystemOpen", "[", "\"\<Function_List.txt\>\"", "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->"In[32]:=",ExpressionUUID->"d5bce6cd-28bd-49e9-b29a-a2925bd01ba7"],
+
+Cell[BoxData[
+ RowBox[{"SystemOpen", "[", "\"\<Function_List.txt\>\"", "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->"In[26]:=",ExpressionUUID->"280e90c4-ae2f-42db-abc4-ba044594081d"],
+
+Cell[BoxData[
+ RowBox[{"SystemOpen", "[", "\"\<Function_List.txt\>\"", "]"}]], "Input",
+ NumberMarks->False,
+ CellLabel->"In[11]:=",ExpressionUUID->"51a9e83d-8743-4cf6-9cb6-e45ce75fb640"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "geometry`*"}]], "Input",
+ CellChangeTimes->{{3.860732742883307*^9, 3.86073275384967*^9}},
+ CellLabel->
+  "In[1228]:=",ExpressionUUID->"b25ed036-1c9e-42c6-999b-8b23afd2080f"],
+
+Cell[BoxData[
+ StyleBox[
+  FrameBox[GridBox[{
+     {
+      DynamicModuleBox[{Typeset`open$$ = True}, 
+       PaneSelectorBox[{False->
+        ButtonBox[
+         RowBox[{
+          
+          DynamicBox[FEPrivate`FrontEndResource[
+           "FEBitmaps", "RightPointerOpener"]], " ", 
+          StyleBox["geometry`", "InformationGridGroupHeader"]}],
+         Appearance->None,
+         BaseStyle->"InformationGridLink",
+         ButtonFunction:>FEPrivate`Set[Typeset`open$$, True],
+         Evaluator->Automatic,
+         Method->"Preemptive"], True->
+        PaneBox[GridBox[{
+           {
+            ButtonBox[
+             RowBox[{
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], " ", 
+              StyleBox["geometry`", "InformationGridGroupHeader"]}],
+             Appearance->None,
+             BaseStyle->"InformationGridLink",
+             ButtonFunction:>FEPrivate`Set[Typeset`open$$, False],
+             Evaluator->Automatic,
+             Method->"Preemptive"]},
+           {
+            PaneBox[GridBox[{
+               {
+                ButtonBox[
+                 StyleBox["BE", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "BE", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["InputFile", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "InputFile", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["s12", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "s12", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["ChangeLNEW", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ChangeLNEW", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["kQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "kQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["s22", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "s22", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["ChangeLNEW1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ChangeLNEW1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["l1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "l1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["StartPoint", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "StartPoint", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Changelnewsize", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Changelnewsize", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["l1temp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "l1temp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["TEnd", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "TEnd", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Chi", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Chi", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["l2", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "l2", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["tetatemp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "tetatemp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Chi0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Chi0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["l2ratio", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "l2ratio", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["tetatempprim", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "tetatempprim", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["dd", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "dd", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["l2temp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "l2temp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalConductivity0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalConductivity0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["delta", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "delta", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["lnew", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "lnew", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalConductivityQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalConductivityQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["DELTANEW", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "DELTANEW", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["LNEW", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "LNEW", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalConductivityQBar", "InformationGridButton"],
+                 
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalConductivityQBar", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["DELTANEW1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "DELTANEW1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["lnew1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "lnew1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalConductivitytemp", "InformationGridButton"],
+                 
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalConductivitytemp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Deltatest", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Deltatest", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["LNEW1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "LNEW1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalExpansion", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalExpansion", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["dpq", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "dpq", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["lnewtest", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "lnewtest", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalExpansion0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalExpansion0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["Dq", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Dq", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Mu0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Mu0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalExpansionFile", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalExpansionFile", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["e", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "e", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["MuBar", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "MuBar", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalExpansionQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalExpansionQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["E0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "E0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["MuQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "MuQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ThermalExpansiontemp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ThermalExpansiontemp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["EndPoint", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "EndPoint", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["MuQtemp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "MuQtemp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Theta", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Theta", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["EQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "EQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["n", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "n", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Thetaprim", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Thetaprim", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FilePath", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "FilePath", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["naccuracy", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "naccuracy", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["TS", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "TS", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FractureEnergy", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "FractureEnergy", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["nChange", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "nChange", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["TStart", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "TStart", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FractureEnergyBC", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "FractureEnergyBC", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ntot", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ntot", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ttest", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ttest", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FractureEnergyInputFile", "InformationGridButton"],
+                 
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "FractureEnergyInputFile", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Nu", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Nu", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["v0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "v0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["FractureEnergyOutputFile", "InformationGridButton"],
+                 
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "FractureEnergyOutputFile", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Nu0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Nu0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["vertexList", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "vertexList", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["G0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "G0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["num1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "num1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["zcenter", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "zcenter", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["GB", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "GB", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["num2", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "num2", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["zcenter1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "zcenter1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["GGB", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "GGB", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["NuQtemp", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "NuQtemp", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["zcenternewlist1", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "zcenternewlist1", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["GintQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "GintQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["OutputFile", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "OutputFile", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Zeta0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "Zeta0", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["GQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "GQ", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["ReadGeometry", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "ReadGeometry", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], ""},
+               {
+                ButtonBox[
+                 StyleBox["inc", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "inc", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["s11", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-93ca9e44-1dac-46ea-abde-7f35e50c1520", {
+                   "s11", "geometry`"}, False},
+                 ButtonNote->"geometry`",
+                 Evaluator->Automatic], ""}
+              },
+              DefaultBaseStyle->"Text",
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+              GridBoxItemSize->{"Columns" -> {{
+                   Scaled[0.31666666666666665`]}}}],
+             ImageMargins->{{10, 0}, {0, 2}}]}
+          },
+          GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}],
+         FrameMargins->{{0, 0}, {8, 0}}]}, Dynamic[Typeset`open$$],
+        ImageSize->Automatic]]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{"ColumnsIndexed" -> {{False}}, "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.8]}, 
+        Offset[0.2]}}],
+   BaseStyle->"InformationTitleFrame"], "InformationGridPlain"]], "Output",
+ CellChangeTimes->{{3.8607327498788567`*^9, 3.86073275466992*^9}},
+ CellLabel->
+  "Out[1228]=",ExpressionUUID->"789775d0-7361-48fc-9b07-16b0d12fca80"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "PhiPsi`*"}]], "Input",
+ CellChangeTimes->{{3.86073425946719*^9, 3.860734290904351*^9}, {
+  3.860734394405222*^9, 3.860734398207591*^9}},
+ CellLabel->"In[82]:=",ExpressionUUID->"32ca660c-8636-4a83-98b0-6fd148bdfece"],
+
+Cell[BoxData[
+ StyleBox[
+  FrameBox[GridBox[{
+     {
+      DynamicModuleBox[{Typeset`open$$ = True}, 
+       PaneSelectorBox[{False->
+        ButtonBox[
+         RowBox[{
+          
+          DynamicBox[FEPrivate`FrontEndResource[
+           "FEBitmaps", "RightPointerOpener"]], " ", 
+          StyleBox["PhiPsi`", "InformationGridGroupHeader"]}],
+         Appearance->None,
+         BaseStyle->"InformationGridLink",
+         ButtonFunction:>FEPrivate`Set[Typeset`open$$, True],
+         Evaluator->Automatic,
+         Method->"Preemptive"], True->
+        PaneBox[GridBox[{
+           {
+            ButtonBox[
+             RowBox[{
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], " ", 
+              StyleBox["PhiPsi`", "InformationGridGroupHeader"]}],
+             Appearance->None,
+             BaseStyle->"InformationGridLink",
+             ButtonFunction:>FEPrivate`Set[Typeset`open$$, False],
+             Evaluator->Automatic,
+             Method->"Preemptive"]},
+           {
+            PaneBox[GridBox[{
+               {
+                ButtonBox[
+                 StyleBox["Alpha0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Alpha0", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Beta0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Beta0", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Phi0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Phi0", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Psi0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Psi0", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["PsiFarQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "PsiFarQ", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["TauFar", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "TauFar", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["XiQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "XiQ", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic]},
+               {
+                ButtonBox[
+                 StyleBox["AlphaFar", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "AlphaFar", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["BetaFar", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "BetaFar", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["PhiFarQ", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "PhiFarQ", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Psi0$", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Psi0$", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Tau0", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Tau0", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["Xi", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "Xi", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic], 
+                ButtonBox[
+                 StyleBox["z", "InformationGridButton"],
+                 Appearance->None,
+                 BaseStyle->"InformationGridLink",
+                 
+                 ButtonData:>{
+                  "Info-6be10560-6a82-4ab8-8a8f-e8bedac14a50", {
+                   "z", "PhiPsi`"}, False},
+                 ButtonNote->"PhiPsi`",
+                 Evaluator->Automatic]}
+              },
+              DefaultBaseStyle->"Text",
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+              GridBoxItemSize->{"Columns" -> {{
+                   Scaled[0.1357142857142857]}}}],
+             ImageMargins->{{10, 0}, {0, 2}}]}
+          },
+          GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}],
+         FrameMargins->{{0, 0}, {8, 0}}]}, Dynamic[Typeset`open$$],
+        ImageSize->Automatic]]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{"ColumnsIndexed" -> {{False}}, "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.8]}, 
+        Offset[0.2]}}],
+   BaseStyle->"InformationTitleFrame"], "InformationGridPlain"]], "Output",
+ CellChangeTimes->{3.8607342833941717`*^9, 3.860734399079955*^9},
+ CellLabel->"Out[82]=",ExpressionUUID->"326e1933-6fa4-4bda-8d3f-9694681c4ad2"]
+}, Open  ]]
+},
+WindowSize->{808, 702},
+WindowMargins->{{15, Automatic}, {1, Automatic}},
+TaggingRules->Association["TryRealOnly" -> False],
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (July 9, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"31e5f65e-a164-400a-86da-8281b4b12243"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 652, 18, 73, "Input",ExpressionUUID->"b141ca8b-dbd8-4ad4-bc95-72dec4324989"],
+Cell[1235, 42, 190, 4, 24, "Print",ExpressionUUID->"609b47f5-46bf-43ef-8701-e55e7106a148"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1462, 51, 3461, 73, 514, "Input",ExpressionUUID->"d1515d8a-bb5f-43e1-becd-78ab6debff13"],
+Cell[4926, 126, 294, 4, 34, "Output",ExpressionUUID->"7bc4a744-69d9-4c81-ac4f-803c98bd0889"]
+}, Open  ]],
+Cell[5235, 133, 187, 3, 60, "Input",ExpressionUUID->"ddfd6286-db33-437e-beb1-1cfc09fe8d32"],
+Cell[5425, 138, 187, 3, 30, "Input",ExpressionUUID->"d5bce6cd-28bd-49e9-b29a-a2925bd01ba7"],
+Cell[5615, 143, 187, 3, 30, "Input",ExpressionUUID->"280e90c4-ae2f-42db-abc4-ba044594081d"],
+Cell[5805, 148, 187, 3, 30, "Input",ExpressionUUID->"51a9e83d-8743-4cf6-9cb6-e45ce75fb640"],
+Cell[CellGroupData[{
+Cell[6017, 155, 202, 4, 30, "Input",ExpressionUUID->"b25ed036-1c9e-42c6-999b-8b23afd2080f"],
+Cell[6222, 161, 37782, 910, 686, "Output",ExpressionUUID->"789775d0-7361-48fc-9b07-16b0d12fca80"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44041, 1076, 244, 4, 30, "Input",ExpressionUUID->"32ca660c-8636-4a83-98b0-6fd148bdfece"],
+Cell[44288, 1082, 8102, 198, 114, "Output",ExpressionUUID->"326e1933-6fa4-4bda-8d3f-9694681c4ad2"]
+}, Open  ]]
+}
+]
+*)
+
